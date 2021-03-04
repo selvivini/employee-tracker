@@ -61,6 +61,9 @@ const init = ()=>{
 			 case 'Remove department':
 			 removeDepartment()
 			 break
+			 case 'Remove role':
+			 removeRole()
+			 break
 			 case 'Exit':
            process.exit();
 
@@ -201,7 +204,7 @@ const removeEmployee = ()=>{
 			 }
 		 ]).then((ans)=>{
 			const delDeptId = res.filter(dept=> dept.name === ans.DeptName).map(dept=>id= dept.id)
-			connection.query(`DELETE FROM DEPARTMENT WHERE id = ${parseInt(delDeptId)}`, (er,results)=>{
+			connection.query(`DELETE FROM department WHERE id = ${parseInt(delDeptId)}`, (err,results)=>{
 				if(err) throw err
 			})
 			console.log('Department has been removed!')
@@ -210,6 +213,34 @@ const removeEmployee = ()=>{
 	 })
 	
 
+ }
+
+ const removeRole = ()=>{
+	const roles = []
+	const query = `SELECT * FROM role `
+	connection.query(query,(err, res)=>{
+		if (err) throw err;
+		
+		res.forEach(role=> roles.push(role.title))
+		console.log(roles)
+		
+		inquirer.prompt([
+			{
+				name: 'roleName',
+				type: 'list',
+				message: 'Which role would you like to remove?',
+				choices: roles
+			}
+		]).then((ans)=>{
+		   const roleId = res.filter(role=> role.title === ans.roleName).map(role=>id= role.id)
+		   console.log(roleId)
+		   connection.query(`DELETE FROM role WHERE id = ${parseInt(roleId)}`, (err,results)=>{
+			   if(err) throw err
+		   })
+		   console.log('role has been removed!')
+		   init()
+		})
+	})
  }
 init()
 
