@@ -64,6 +64,9 @@ const init = ()=>{
 			 case 'Remove role':
 			 removeRole()
 			 break
+			 case 'update employee role':
+			 updateEmployeeRole()
+			 break
 			 case 'Exit':
            process.exit();
 
@@ -193,7 +196,7 @@ const removeEmployee = ()=>{
 		 if (err) throw err;
 		 
 		 res.forEach(dept=> departments.push(dept.name))
-		 console.log(departments)
+		  
 		 
 		 inquirer.prompt([
 			 {
@@ -222,7 +225,7 @@ const removeEmployee = ()=>{
 		if (err) throw err;
 		
 		res.forEach(role=> roles.push(role.title))
-		console.log(roles)
+	
 		
 		inquirer.prompt([
 			{
@@ -233,7 +236,7 @@ const removeEmployee = ()=>{
 			}
 		]).then((ans)=>{
 		   const roleId = res.filter(role=> role.title === ans.roleName).map(role=>id= role.id)
-		   console.log(roleId)
+		   
 		   connection.query(`DELETE FROM role WHERE id = ${parseInt(roleId)}`, (err,results)=>{
 			   if(err) throw err
 		   })
@@ -242,6 +245,51 @@ const removeEmployee = ()=>{
 		})
 	})
  }
+
+ const updateEmployeeRole= ()=>{
+	
+	const empNames= [];
+	const empRoles= [];
+	const roleId = []
+	const query = `SELECT employee.id,concat(first_name, " ", last_name) AS employee, role_id , role.title AS role FROM employee
+	INNER JOIN role
+	ON employee.role_id = role.id`
+	connection.query(query, (err, res)=>{
+	const result = JSON.parse(JSON.stringify(res))
+	console.log(result)
+	res.forEach(emp =>{empNames.push(emp.employee), empRoles.push(emp.role), roleId.push(emp.role_id)}  )
+    
+	inquirer.prompt([
+		{
+          name: 'empName',
+		  type: 'list',
+		  message: 'which employee you want to update?',
+		  choices: empNames
+	     },
+		 {
+		  name: 'empRoles',
+		  type: 'list',
+		  message: 'which role would you like to update the employee with?',
+		  choices: empRoles
+		 }
+
+]).then(answers=>{
+	let setEmpId
+	let setRoleId
+    let empSearch =result.find(res=> res.employee === answers.empName)
+    let roleSearch = result.find(res=> res.role === answers.empRoles)
+    setEmpId = empSearch.id
+	setRoleId = roleSearch.role_id
+	
+	connection.query(`UPDATE employee SET role_id =${setRoleId}  WHERE id = ${setEmpId} `,(er,res)=>{
+		if(err) throw err
+	})
+	console.log('Updated employee role!')
+	init()
+})
+
+	})
+  }
 init()
 
 
