@@ -281,7 +281,7 @@ const removeEmployee = ()=>{
     setEmpId = empSearch.id
 	setRoleId = roleSearch.role_id
 	
-	connection.query(`UPDATE employee SET role_id =${setRoleId}  WHERE id = ${setEmpId} `,(er,res)=>{
+	connection.query(`UPDATE employee SET role_id =${setRoleId}  WHERE id = ${setEmpId} `,(err,res)=>{
 		if(err) throw err
 	})
 	console.log('Updated employee role!')
