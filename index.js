@@ -15,6 +15,7 @@ const init = ()=>{
 				'view all employees by manager',
 				'view all departments',
 				'view all roles',
+				'view total budget',
 				'Add department',
 				'Add role',
 				'Add employee',
@@ -47,6 +48,10 @@ const init = ()=>{
 				 role.viewRoles()
 				 init()
 				 break
+			 case 'view total budget':
+				department.utilizedBudget()
+				init() 
+				break
 			 case 'Add department':
 		     addDepartment()
 			 case 'Add role':
@@ -335,6 +340,7 @@ const removeEmployee = ()=>{
 		})
 	 })
   }
+  
 init()
 
 
