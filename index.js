@@ -67,6 +67,9 @@ const init = ()=>{
 			 case 'update employee role':
 			 updateEmployeeRole()
 			 break
+			 case 'update employee manager':
+			 updateEmployeeManager()
+             break
 			 case 'Exit':
            process.exit();
 
@@ -289,6 +292,48 @@ const removeEmployee = ()=>{
 })
 
 	})
+  }
+
+  const updateEmployeeManager = ()=>{
+	 
+	 connection.query(`SELECT employee.first_name, employee.last_name, employee.id,concat(first_name, " ", last_name) AS employee FROM employee`,(err,res)=>{
+		 if(err) throw err
+		
+		const empNames = []
+		res.forEach(emp=> empNames.push(emp.employee))
+		// console.log(empNames)
+		
+		inquirer.prompt([
+			{
+				name: 'empName',
+				type: 'list',
+				message: 'Which employee would you like to update the manager?',
+				choices: empNames
+			},
+			{
+				name: 'managerId',
+				type: 'number',
+				message: "what is employee's new manager's id"
+
+
+			}
+		]).then(ans=>{
+			console.log(ans)
+		 const result = JSON.parse(JSON.stringify(res))
+		 
+		let findEmp= result.filter(emp =>emp.employee === ans.empName)
+		
+		let setEmpId = findEmp[0].id
+		
+			connection.query(`UPDATE employee SET manager_id= ${ans.managerId} WHERE id = ${setEmpId}`,(err,res)=>{
+				{
+				if(err) throw err
+				}
+				console.log('manager updated successfully!')
+				init()
+			})
+		})
+	 })
   }
 init()
 
