@@ -3,8 +3,22 @@ const employee = require('./lib/employee');
 const role = require('./lib/role');
 const department = require('./lib/department');
 const connection = require('./lib/connection');
+const figlet = require('figlet');
+
+const banner = ()=>{
+
+	figlet('Employee Tracker', (err,data)=>{
+		if(err){
+			console.log('something went wrong!')
+			console.dir(err)
+			return
+		}
+		console.log(data)
+	})
+}
 
 const init = ()=>{
+	
 	 inquirer.prompt([
 		{
 			name: 'action',
@@ -340,8 +354,9 @@ const removeEmployee = ()=>{
 		})
 	 })
   }
-  
-init()
+banner();
+init();
+
 
 
 

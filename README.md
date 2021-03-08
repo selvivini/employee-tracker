@@ -36,9 +36,10 @@ The user of this command line application has option to view, update, delete and
 * SQL FOR QUERIES
 * JAVASCRIPT
 * DOTENV for storing the environment variables
-
+* FIGLET for diplaying the banner
 ## MOCKUP
 The following images shows the mockup of this application
+![banner](Assets/banner.PNG)
 ![viewEmployees](Assets/viewemp.PNG)
 ![viewEmployee manager](Assets/viewempman.PNG)
 ![view roles](Assets/viewrole.PNG)
