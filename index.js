@@ -264,7 +264,7 @@ const removeEmployee = ()=>{
 	ON employee.role_id = role.id`
 	connection.query(query, (err, res)=>{
 	const result = JSON.parse(JSON.stringify(res))
-	console.log(result)
+	
 	res.forEach(emp =>{empNames.push(emp.employee), empRoles.push(emp.role), roleId.push(emp.role_id)}  )
     
 	inquirer.prompt([

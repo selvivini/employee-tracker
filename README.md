@@ -26,4 +26,23 @@ Bonus points if you're able to:
 
   * View the total utilized budget of a department -- ie the combined salaries of all employees in that department
 
-We can frame this challenge as follows:
+## Application usage
+The user of this command line application has option to view, update, delete and add employee roles, employee and departments.
+
+## TECHNOLOGIES used
+* NODEJS
+* INQUIRER
+* MYSQL
+* SQL FOR QUERIES
+* JAVASCRIPT
+
+## MOCKUP
+The following images shows the mockup of this application
+![viewEmployees](Assets/viewemp.PNG)
+![viewEmployee manager](Assets/viewempman.PNG)
+![view roles](Assets/viewrole.PNG)
+
+![consolidated budget of all departments](Assets/budget.PNG)<br>
+![view departments](Assets/viewdept.PNG)
+
+
