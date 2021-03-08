@@ -35,6 +35,7 @@ The user of this command line application has option to view, update, delete and
 * MYSQL
 * SQL FOR QUERIES
 * JAVASCRIPT
+* DOTENV for storing the environment variables
 
 ## MOCKUP
 The following images shows the mockup of this application
@@ -45,4 +46,7 @@ The following images shows the mockup of this application
 ![consolidated budget of all departments](Assets/budget.PNG)<br>
 ![view departments](Assets/viewdept.PNG)
 
+## VIDEO LINK
 
+Please view the following video to know how the app works!
+[video url](https://drive.google.com/file/d/13ycG_Xe-pIvivGpooBUZpdzZQJeTu1qO/view)
