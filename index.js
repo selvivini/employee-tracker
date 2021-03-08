@@ -5,6 +5,7 @@ const department = require('./lib/department');
 const connection = require('./lib/connection');
 const figlet = require('figlet');
 
+//  Employee tracker banner
 const banner = ()=>{
 
 	figlet('Employee Tracker', (err,data)=>{
@@ -17,6 +18,7 @@ const banner = ()=>{
 	})
 }
 
+// function initiates with series of prompts for the user to choose from
 const init = ()=>{
 	
 	 inquirer.prompt([
@@ -44,6 +46,7 @@ const init = ()=>{
 		}
 		
 	])
+	// switch cases based on the user's selection calls the appropriate function
 	.then( (answers) => {
 		switch (answers.action) {
 			case 'view all employees':
@@ -98,7 +101,7 @@ const init = ()=>{
 	});
     
 }
-
+// function to add department
 const addDepartment = ()=>{
 	inquirer.prompt([
 	   {
@@ -120,6 +123,8 @@ const addDepartment = ()=>{
    
    
 }
+
+//  function to add role
 const addRole = ()=>{
 	inquirer.prompt([
 	   {
@@ -141,6 +146,8 @@ const addRole = ()=>{
    
    
 }
+
+//  adds employee
 const addEmployee = ()=>{
 	inquirer.prompt([
 		{
@@ -177,7 +184,7 @@ const addEmployee = ()=>{
 
 }
 
-
+//  removes employee
 const removeEmployee = ()=>{
 	const empNames = [];
 	
@@ -211,6 +218,8 @@ const removeEmployee = ()=>{
      
   
 } 
+
+//  removes department
  const removeDepartment= ()=>{
 	 const departments = []
 	 const query = `SELECT * FROM department `
@@ -239,7 +248,7 @@ const removeEmployee = ()=>{
 	
 
  }
-
+//  removes role
  const removeRole = ()=>{
 	const roles = []
 	const query = `SELECT * FROM role `
@@ -312,7 +321,7 @@ const removeEmployee = ()=>{
 
 	})
   }
-
+// updates the employee's manger
   const updateEmployeeManager = ()=>{
 	 
 	 connection.query(`SELECT employee.first_name, employee.last_name, employee.id,concat(first_name, " ", last_name) AS employee FROM employee`,(err,res)=>{
